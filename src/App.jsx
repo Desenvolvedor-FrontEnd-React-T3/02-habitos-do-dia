@@ -8,9 +8,13 @@ import initialHabits from "./data/habits";
 
 function App() {
   const [habits, setHabits] = useState(initialHabits);
+  const [count, setCount] = useState(0);
 
   function handleToggle(id) {
-    console.log(id);
+    setCount(count + 1);
+    console.log(count);
+
+    //console.log(id);
 
     setHabits(
       habits.map((habit) => {
