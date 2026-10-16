@@ -4,6 +4,7 @@ import { Counter } from "./components/Counter";
 import { HabitCard } from "./components/HabitCard";
 import { Header } from "./components/Header";
 import { CounterExercise } from "./components/CounterExercise";
+import { PlayersPoints } from "./components/PlayersPoints";
 
 import initialHabits from "./data/habits";
 
@@ -26,11 +27,12 @@ function App() {
 
   return (
     <>
-      <CounterExercise />
-      {/* <Header /> */}
-      {/* <Counter /> */}
+      {/* <PlayersPoints /> */}
+      {/* <CounterExercise /> */}
+      <Header />
+      <Counter />
 
-      {/* <main className="habit-list">
+      <main className="habit-list">
         {habits.map((habit) => (
           <HabitCard
             key={habit.id}
@@ -40,7 +42,7 @@ function App() {
             onToggle={() => handleToggle(habit.id)}
           />
         ))}
-      </main> */}
+      </main>
     </>
   );
 }
