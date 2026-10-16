@@ -1,0 +1,10 @@
+.points {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.points-button {
+  display: flex;
+  gap: 12px;
+}
