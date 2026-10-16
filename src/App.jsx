@@ -3,21 +3,32 @@ import "./App.css";
 import { Counter } from "./components/Counter";
 import { HabitCard } from "./components/HabitCard";
 import { Header } from "./components/Header";
-import { CounterExercise } from "./components/CounterExercise";
-import { PlayersPoints } from "./components/PlayersPoints";
+// import { CounterExercise } from "./components/CounterExercise";
+// import { PlayersPoints } from "./components/PlayersPoints";
 
 import initialHabits from "./data/habits";
+import { HabitForm } from "./components/HabitForm";
 
 function App() {
   const [habits, setHabits] = useState(initialHabits);
 
   const doneCount = habits.filter((habit) => habit.done).length
 
+  function handleAdd(name) {
+    const newHabit = {
+      id: Date.now(),
+      icon: "⭐️",
+      name,
+      done: false
+    }
+
+    setHabits([...habits, newHabit])
+  }
+
 
   // const [count, setCount] = useState(0);
 
   function handleToggle(id) {
-
     // setCount(count + 1);
     // console.log(count);
 
@@ -50,6 +61,8 @@ function App() {
           />
         ))}
       </main>
+
+      <HabitForm onAdd={handleAdd} />
     </>
   );
 }
