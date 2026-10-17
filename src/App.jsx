@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import { Counter } from "./components/Counter";
 import { HabitCard } from "./components/HabitCard";
@@ -9,8 +9,14 @@ import { Header } from "./components/Header";
 import initialHabits from "./data/habits";
 import { HabitForm } from "./components/HabitForm";
 
+function loadHabits() {
+  const saved = localStorage.getItem("habits")
+
+  return saved ? JSON.parse(saved) : initialHabits
+}
+
 function App() {
-  const [habits, setHabits] = useState(initialHabits);
+  const [habits, setHabits] = useState(loadHabits);
 
   const doneCount = habits.filter((habit) => habit.done).length
 
@@ -24,6 +30,16 @@ function App() {
 
     setHabits([...habits, newHabit])
   }
+
+  useEffect(() => {
+    document.title = `
+      (${doneCount}/${habits.length}) Hábitos do dia
+    `
+  }, [doneCount, habits.length])
+
+  useEffect(() => {
+    localStorage.setItem("habits", JSON.stringify(habits))
+  }, [habits])
 
 
   // const [count, setCount] = useState(0);
@@ -54,18 +70,25 @@ function App() {
 
       <Counter doneCount={doneCount} total={habits.length} />
 
-      <main className="habit-list">
-        {habits.map((habit) => (
-          <HabitCard
-            key={habit.id}
-            icon={habit.icon}
-            name={habit.name}
-            done={habit.done}
-            onToggle={() => handleToggle(habit.id)}
-            onDelete={() => handleDelete(habit.id)}
-          />
-        ))}
-      </main>
+      
+      {
+        habits.length == 0 ? (
+          <p className="empty">Nenhum item na lista de hábitos.</p>
+        ): (
+            <main className="habit-list">
+              {habits.map((habit) => (
+                <HabitCard
+                  key={habit.id}
+                  icon={habit.icon}
+                  name={habit.name}
+                  done={habit.done}
+                  onToggle={() => handleToggle(habit.id)}
+                  onDelete={() => handleDelete(habit.id)}
+                />
+              ))}
+            </main>
+        )
+      }
 
       <HabitForm onAdd={handleAdd} />
     </>
