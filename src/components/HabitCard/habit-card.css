@@ -43,3 +43,14 @@ button {
 .done h3 {
   text-decoration: line-through;
 }
+
+.habit-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.delete-button {
+  border-color: #b91c1c;
+  background-color: #ffffff;
+  color: #b91c1c;
+}
