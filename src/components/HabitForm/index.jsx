@@ -6,7 +6,7 @@ export function HabitForm({onAdd}) {
 
   function handleSubmit(e) {
     e.preventDefault()
-    onAdd(name)
+    onAdd(name.trim())
     setName("")
   }
 
@@ -21,8 +21,8 @@ export function HabitForm({onAdd}) {
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
-      <p></p>
-      <button>Adicionar</button>
+      <p className="char-count">{name.length}/40</p>
+      <button disabled={name.trim() == ""}>Adicionar</button>
     </form>
   )
 }
